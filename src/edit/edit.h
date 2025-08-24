@@ -2,6 +2,7 @@
 #include "EditUtils.h"
 #include "msys_vector.h"
 #include "TextEdit.h"
+#include "nodal.h"
 
 class Edit
 {
@@ -17,6 +18,7 @@ protected:
     unsigned int m_tabItem{5};
 
     TextEdit m_textEdit;
+    Nodal m_nodal;
 
     EditBase* m_editors[1] = {&m_textEdit};
     EditBase* mActiveEditor{nullptr};

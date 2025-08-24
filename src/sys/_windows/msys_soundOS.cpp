@@ -6,22 +6,23 @@
 #define WIN32_EXTRA_LEAN
 #include <windows.h>
 #include <mmsystem.h>
+#include <mmreg.h>
 
-#define PLAYER_RATE         44100
+#define PLAYER_RATE         48000
 #define PLAYER_NUMCHANNELS  2
 #define PLAYER_LATENCY      20
 
 //------------------------------------------------------------------------------------------------------------
 
 static const WAVEFORMATEX wavinfo = {
-    WAVE_FORMAT_PCM,					// format type
-    PLAYER_NUMCHANNELS,					// number of channels
-    PLAYER_RATE,						// sample rate 
-    PLAYER_RATE*2*PLAYER_NUMCHANNELS,	// for buffer estimation = rate*"block size of data"
-    2*PLAYER_NUMCHANNELS,				// block size of data = 4 bytes = 2*16bit
-    16,									// number of bits per sample of mono data
-    0 };
-
+    WAVE_FORMAT_IEEE_FLOAT,             // Use IEEE float format
+    PLAYER_NUMCHANNELS,                 // number of channels
+    PLAYER_RATE,                        // sample rate
+    PLAYER_RATE * PLAYER_NUMCHANNELS * sizeof(float),  // avg bytes per second
+    PLAYER_NUMCHANNELS * sizeof(float), // block align (bytes per frame)
+    32,                                 // bits per sample
+    0
+};
 
 static HWAVEOUT h   =   0;      // this one is anty-thread-safe, but we don't care in this case...
 static WAVEHDR  wav = { 0, 0, 0,0, WHDR_BEGINLOOP|WHDR_ENDLOOP, 0xffffffff, 0,0 };

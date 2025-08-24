@@ -8,6 +8,11 @@
 #define GL_UNSIGNED_INT_24_8              0x84FA
 #define GL_DEPTH_STENCIL_ATTACHMENT       0x821A
 
+#ifdef WIN32
+#define GL_RG 0x8227
+#define GL_RG32F 0x8230
+#endif
+
 enum {
     ATTRIB_POSITION = 1 << 0,
     ATTRIB_NORMAL = 1 << 1,

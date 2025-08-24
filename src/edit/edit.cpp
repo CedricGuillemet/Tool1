@@ -587,6 +587,7 @@ void Edit::Init()
     setDarkThemeColors();
 
     m_textEdit.Init();
+    m_nodal.OnStart();
 }
 
 void Edit::ShowContentGUI()
@@ -616,11 +617,13 @@ void Edit::ShowContentGUI()
         ImVec2 windowPos = ImGui::GetWindowPos();
         ImGuizmo::SetRect(windowPos.x + offset.x, windowPos.y + offset.y, mContentRenderingSize.x, mContentRenderingSize.y);
 
-        mActiveEditor->ContentBurn(mContentRenderingSize, ImVec2(windowPos.x + offset.x, windowPos.y + offset.y));
+        //mActiveEditor->ContentBurn(mContentRenderingSize, ImVec2(windowPos.x + offset.x, windowPos.y + offset.y));
 
         auto& io = ImGui::GetIO();
         mMouseNormalizedPosition.x = (io.MousePos.x - offset.x) / mContentRenderingSize.x;
         mMouseNormalizedPosition.y = (io.MousePos.y - offset.y) / mContentRenderingSize.y;
+
+        m_nodal.DoIt();
     }
     ImGui::End();
 }
@@ -686,6 +689,7 @@ void Edit::ShowContent(matrix view, matrix projection)
         {
             destroy_framebuffer(mContentFrameBuffer);
         }
+
         mContentFrameBuffer = build_framebuffer(4096, 4096, GL_RG, GL_FLOAT, GL_RG32F, true);
     }
 /*

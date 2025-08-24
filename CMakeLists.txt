@@ -92,6 +92,7 @@ add_definitions(-DTOOLS=1)
 
 include_directories("src")
 include_directories("src/sys")
+include_directories("src/node")
 set(SOURCES ${SRC_FILES} ${SYS_FILES} ${PLATFORM_FILES} ${TOOLS_FILES} ${TOOLS_PLATFORM_FILES} ${EDIT_FILES} ${NODE_FILES})
 
 if(WIN32)
