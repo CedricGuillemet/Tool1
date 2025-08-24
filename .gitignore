@@ -41,3 +41,5 @@
 *.dwo
 .DS_Store
 build/
+bin/Toool_d
+

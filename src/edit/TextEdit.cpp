@@ -99,14 +99,11 @@ void TextEdit::ShowContent(FrameBuffer& contentViewFrameBuffer, unsigned int pre
         
         bind_backbuffer();
         
-        glBindTexture(GL_TEXTURE_2D, contentViewFrameBuffer.texture);
-        glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, data);
-
+        //glBindTexture(GL_TEXTURE_2D, contentViewFrameBuffer.texture);
+        //glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, data);
         
-        
-        
-        msys_soundInit(data, sizeof(float) * 4096 * 4096 * 2);
-        msys_soundStart();
+        //msys_soundInit(data, sizeof(float) * 4096 * 4096 * 2);
+        //msys_soundStart();
     }
     /*
     if (saveImage)
