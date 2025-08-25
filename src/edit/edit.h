@@ -12,6 +12,7 @@ public:
     void ShowContent(matrix view, matrix projection);
     bool Record(bool forceRecording);
 
+    std::string GenerateShader() { return m_nodal.GenerateShader(); }
 protected:
     void ShowContentGUI();
 

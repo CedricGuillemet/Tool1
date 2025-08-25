@@ -77,7 +77,7 @@ float GetDPIFactor()
 
     // Setup Platform/Renderer backends
     ImGui_ImplOSX_Init(self);
-    ImGui_ImplOpenGL3_Init("#version 120");
+    ImGui_ImplOpenGL3_Init("#version 330 core");
 #endif
 }
 
@@ -198,9 +198,10 @@ void MakeLoaderContextCurrent()
 
     NSOpenGLPixelFormatAttribute attrs[] =
     {
-        NSOpenGLPFADoubleBuffer,
-        NSOpenGLPFADepthSize, 32,
-        0
+        NSOpenGLPFAOpenGLProfile, NSOpenGLProfileVersion3_2Core, // Core profile
+            NSOpenGLPFADoubleBuffer,
+            NSOpenGLPFADepthSize, 32,
+            0
     };
 
     NSOpenGLPixelFormat* format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];

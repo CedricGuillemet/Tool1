@@ -5,7 +5,7 @@
 #include <vector>
 #endif
 
-const char* GlslVersionString = "#version 120\n";
+const char* GlslVersionString = "#version 330\n";
 unsigned int currentShader;
 
 #define VAR_Bones "Bones"

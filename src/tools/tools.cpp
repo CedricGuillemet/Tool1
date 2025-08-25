@@ -3,7 +3,8 @@
 #include "ImGuizmo.h"
 #include "EditUtils.h"
 #include "edit.h"
-static Edit edit;
+
+Edit edit;
 
 void tools_init()
 {

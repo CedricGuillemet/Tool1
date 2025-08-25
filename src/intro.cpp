@@ -18,6 +18,7 @@ TOOL
 #include "msys_debug.h"
 #include <stdio.h>
 #include <string>
+#include "edit.h"
 
 void ClearLog();
 /*
@@ -42,13 +43,15 @@ inline std::string ReadFile(const char* filePath)
     return "";
 }
 */
+std::string shaderContent;
+/*
 std::string shaderContent = R"(
 #define TWO_PI 6.28318530718
 varying vec4 parameters;
 void main() {
 vec2 tc = vec2(gl_FragCoord.xy);
-float time = (tc.y * 4096. + tc.x) / 48000. ;
-vec2 dest = vec2(sin(time * TWO_PI * 440.));
+float t = (tc.y * 4096. + tc.x) / 48000. ;
+vec2 dest = vec2(0.);//vec2(sin(time * TWO_PI * 440.));
 
 gl_FragColor = vec4(dest.xy, 0., 0.);
 }
@@ -67,10 +70,10 @@ void SaveFile(const char* filePath)
 unsigned int compiledShader = 0;
 
 const char* fsVertex = R"(
-attribute vec3 Position;
+layout(location = 0) in vec3 Position;
+
 void main() {
-    gl_Position = vec4(Position.xy,0,1);
-    //vTexCoord = 0.5 * Position.xy + vec2(0.5);
+    gl_Position = vec4(Position.xy, 0.0, 1.0);
 }
 )";
 
@@ -78,6 +81,26 @@ void main() {
 void UpdateShader()
 {
     ClearLog();
+    
+    extern Edit edit;
+    
+    shaderContent = R"(
+    #define TWO_PI 6.28318530718
+    in vec4 parameters;        // Replaces 'varying' from vertex shader
+    out vec4 FragColor;        // Replaces gl_FragColor
+
+    void main() {
+    vec2 tc = vec2(gl_FragCoord.xy);
+    float t = (tc.y * 4096. + tc.x) / 48000. ;
+    vec2 dest = vec2(0.);//vec2(sin(time * TWO_PI * 440.));
+    )";
+
+    shaderContent += edit.GenerateShader();
+
+    shaderContent += R"(
+    FragColor = vec4(dest.xy, 0.0, 0.0);
+    })";
+
     unsigned int newCompiledShader = compile_shader(fsVertex, shaderContent.c_str(), "demoShader", false);
     
     if (shader_compiled(newCompiledShader))
