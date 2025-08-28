@@ -2,6 +2,7 @@
 #include <imgui_node_editor.h>
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace ed = ax::NodeEditor;
 
