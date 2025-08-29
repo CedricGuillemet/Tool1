@@ -690,7 +690,7 @@ void Edit::ShowContent(matrix view, matrix projection)
             destroy_framebuffer(mContentFrameBuffer);
         }
 
-        mContentFrameBuffer = build_framebuffer(4096, 4096, GL_RG, GL_FLOAT, GL_RG32F, true);
+        mContentFrameBuffer = build_framebuffer(4096, 4096, GL_RG, GL_FLOAT, GL_RG32F);
     }
 /*
     extern bool iterativeRendering;
