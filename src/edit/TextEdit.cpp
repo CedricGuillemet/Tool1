@@ -92,8 +92,13 @@ void TextEdit::ShowContent(FrameBuffer& contentViewFrameBuffer, unsigned int pre
     if (needRendering)
     {
         glDisable(GL_CULL_FACE);
+        glDisable(GL_DEPTH_TEST);
+        glClearColor(0.2f, 0.3f, 0.f, 1.f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        
         bind_shader(compiledShader);
-        glRects(-1, -1, 1, 1);
+        //glRects(-1, -1, 1, 1);
+        draw(fullscreenMesh);
         
         needRendering = false;
         

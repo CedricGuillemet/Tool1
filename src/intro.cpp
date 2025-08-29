@@ -100,6 +100,15 @@ void UpdateShader()
     shaderContent += R"(
     FragColor = vec4(dest.xy, 0.0, 0.0);
     })";
+    
+    
+    shaderContent = R"(
+    out vec4 FragColor;        // Replaces gl_FragColor
+
+    void main() {
+    FragColor = vec4(1., 0.666, 0.0, 0.);
+    }
+)";
 
     unsigned int newCompiledShader = compile_shader(fsVertex, shaderContent.c_str(), "demoShader", false);
     
